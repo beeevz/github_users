@@ -1,0 +1,10 @@
+{
+    "appTitle": "Github Users Demo App",
+    "@appTitle": {
+        "description": "Application Title details"
+    },
+    "search": "Search...",
+    "@search": {
+        "description": "Search field input hint"
+    }
+}
