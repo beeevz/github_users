@@ -9,11 +9,14 @@ class AccountListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: accountList.length,
-      itemBuilder: (context, index) {
-        return AccountListTile(accountList[index]);
-      },
+    return Container(
+      margin: EdgeInsets.only(left: 10, right: 10),
+      child: ListView.builder(
+        itemCount: accountList.length,
+        itemBuilder: (context, index) {
+          return AccountListTile(accountList[index]);
+        },
+      ),
     );
   }
 }

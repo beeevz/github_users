@@ -43,37 +43,44 @@ class _HomeWidgetState extends State<HomeWidget> {
     return Scaffold(
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          return Container(
-            margin: EdgeInsets.all(10),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisAlignment:
-                  (state is HomeInitial)
-                      ? MainAxisAlignment.center
-                      : MainAxisAlignment.start,
-              children: [
-                TextFormField(
+          return Column(
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeIn,
+                margin: EdgeInsets.only(
+                  top:
+                      state is HomeInitial
+                          ? MediaQuery.of(context).size.height * 0.4
+                          : 20,
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: TextFormField(
                   controller: _searchFieldController,
                   decoration: InputDecoration(
                     hintText: t(context).search,
                     suffixIcon:
                         (state is HomeLoading)
-                            ? CircularProgressIndicator()
+                            ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
                             : null,
                   ),
                   onChanged: (value) {
                     _onSearchChanged(context, value);
                   },
                 ),
-                SizedBox(height: 10),
-                if (state is! HomeInitial)
-                  Expanded(
-                    child: AccountListView(
-                      accountList: _getAccountsFromState(state),
-                    ),
+              ),
+              const SizedBox(height: 10),
+              if (state is! HomeInitial)
+                Expanded(
+                  child: AccountListView(
+                    accountList: _getAccountsFromState(state),
                   ),
-              ],
-            ),
+                ),
+            ],
           );
         },
       ),

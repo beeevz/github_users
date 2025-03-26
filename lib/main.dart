@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       routerConfig: GoRouter(routes: GithubUserRoutes.githubUserRoutes),
       theme: lightTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
+      debugShowCheckedModeBanner: false,
       supportedLocales: AppLocalizations.supportedLocales,
     );
   }
