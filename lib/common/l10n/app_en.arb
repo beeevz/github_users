@@ -6,5 +6,9 @@
     "search": "Search...",
     "@search": {
         "description": "Search field input hint"
+    },
+    "unknownType": "Unknown Account Type",
+    "@unknownType": {
+        "description": "Used when we have a null account type"
     }
 }
