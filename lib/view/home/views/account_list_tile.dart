@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
 import 'package:github_users/data/accounts/model/account.dart';
+import 'package:github_users/view/accountdetails/accountdetails.dart';
 import 'package:github_users/view/theme/github_theme.dart';
+import 'package:go_router/go_router.dart';
 
 class AccountListTile extends StatefulWidget {
   final Account account;
@@ -17,39 +19,44 @@ class _AccountListTileState extends State<AccountListTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 10),
-      child: Row(
-        children: [
-          ClipOval(
-            child: Image.network(
-              widget.account.avatarUrl ?? "",
-              height: 50.0,
-              width: 50.0,
-              fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        context.pushNamed(AccountDetailsWidget.routePath);
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 10, bottom: 10),
+        child: Row(
+          children: [
+            ClipOval(
+              child: Image.network(
+                widget.account.avatarUrl ?? "",
+                height: 50.0,
+                width: 50.0,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.account.account),
-              Text(widget.account.type ?? t(context).unknownType),
-            ],
-          ),
-          Spacer(),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                isFavourite = !isFavourite;
-              });
-            },
-            icon: Icon(
-              isFavourite ? Icons.favorite :Icons.favorite_border,
-              color: _getFavouriteColor(context),
+            SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(widget.account.account),
+                Text(widget.account.type ?? t(context).unknownType),
+              ],
             ),
-          ),
-        ],
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  isFavourite = !isFavourite;
+                });
+              },
+              icon: Icon(
+                isFavourite ? Icons.favorite : Icons.favorite_border,
+                color: _getFavouriteColor(context),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

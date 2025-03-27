@@ -21,13 +21,15 @@ class GithubUserRoutes {
           child: HomeWidget(),
         );
       },
-    ),
-    GoRoute(
-      path: AccountDetailsWidget.routePath,
-      name: AccountDetailsWidget.routeName,
-      builder: (context, state) {
-        return AccountDetailsWidget();
-      },
+      routes: [
+        GoRoute(
+          path: AccountDetailsWidget.routePath,
+          name: AccountDetailsWidget.routeName,
+          builder: (context, state) {
+            return AccountDetailsWidget();
+          },
+        ),
+      ],
     ),
   ];
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AccountDetailsWidget extends StatelessWidget {
-  static const routePath = "/account-details";
+  static const routePath = "/account-details/:id";
   static const routeName = "account-details";
   static const routeAccountid = "account-id";
 

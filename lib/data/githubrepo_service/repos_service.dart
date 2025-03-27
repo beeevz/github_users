@@ -1,0 +1,32 @@
+import 'dart:convert';
+
+import 'package:get_it/get_it.dart';
+import 'package:github_users/common/globals.dart';
+import 'package:github_users/data/githubrepo_service/fetch_githubrepos_error.dart';
+import 'package:github_users/data/githubrepo_service/model/repo.dart';
+import 'package:github_users/data/network/network_client.dart';
+import 'package:github_users/data/network/result.dart';
+
+class ReposService {
+  final networkClient = GetIt.instance<NetworkClient>();
+  final globals = GetIt.instance<Globals>();
+
+  Future<Result<List<Repo>, FetchGithubreposError>> getRepos(
+    String username,
+  ) async {
+    final uri = "${globals.domain}/users/$username/repos";
+    final response = await networkClient.get(uri);
+    if (response.statusCode != 200) return Error(GeneralFetchReposError());
+
+    try {
+      List<Repo> reposList = [];
+      final responseMap = response.body as List;
+      for (var repoProps in responseMap) {
+        reposList.add(Repo.fromJson(repoProps));
+      }
+      return Success(reposList);
+    } catch (e) {
+      return Error(GeneralFetchReposError());
+    }
+  }
+}

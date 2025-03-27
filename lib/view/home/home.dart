@@ -18,14 +18,10 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final _searchFieldController = TextEditingController();
-  final _searchFocusNode = FocusNode();
   Timer? _searchDebouncer;
 
   @override
   void dispose() {
-    _searchFieldController.dispose();
-    _searchFocusNode.dispose();
     _searchDebouncer?.cancel();
     super.dispose();
   }
@@ -56,7 +52,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextFormField(
-                  controller: _searchFieldController,
                   decoration: InputDecoration(
                     hintText: t(context).search,
                     suffixIcon:
