@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:github_users/common/globals.dart';
 import 'package:github_users/data/accounts/account_error.dart';
 import 'package:github_users/data/accounts/model/account.dart';
+import 'package:github_users/data/accounts/model/account_details.dart';
 import 'package:github_users/data/network/network_client.dart';
 import 'package:github_users/data/network/result.dart';
 
@@ -25,6 +26,22 @@ class AccountsService {
         accountList.add(Account.fromJson(accountProps));
       }
       return Success(accountList);
+    } catch (e) {
+      return Error(GeneralAccountsFailed());
+    }
+  }
+
+  Future<Result<AccountDetails, GetAccountsError>> getAccountDetails(
+    String username,
+  ) async {
+    final uri = "${globals.domain}/search/users/$username";
+    final response = await networkClient.get(uri);
+    if (response.statusCode != 200) return Error(GeneralAccountsFailed());
+
+    try {
+      final responseProps = json.decode(response.body) as Map<String, dynamic>;
+      final accountDetails = AccountDetails.fromJson(responseProps);
+      return Success(accountDetails);
     } catch (e) {
       return Error(GeneralAccountsFailed());
     }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
 import 'package:github_users/data/accounts/model/account.dart';
 import 'package:github_users/view/accountdetails/accountdetails.dart';
-import 'package:github_users/view/theme/github_theme.dart';
 import 'package:go_router/go_router.dart';
 
 class AccountListTile extends StatefulWidget {
