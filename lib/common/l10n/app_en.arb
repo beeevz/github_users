@@ -10,5 +10,10 @@
     "unknownType": "Unknown Account Type",
     "@unknownType": {
         "description": "Used when we have a null account type"
+    },
+    "failed": "Something went wrong, please try again.",
+    "@failed": {
+        "description": "Used as a generic error"
     }
+
 }

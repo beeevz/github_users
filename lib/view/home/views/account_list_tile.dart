@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
 import 'package:github_users/data/accounts/model/account.dart';
+import 'package:github_users/data/accounts/model/account_details.dart';
 import 'package:github_users/view/accountdetails/accountdetails.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,7 +21,12 @@ class _AccountListTileState extends State<AccountListTile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushNamed(AccountDetailsWidget.routePath);
+        context.pushNamed(
+          AccountDetailsWidget.routeName,
+          pathParameters: {
+            AccountDetailsWidget.routeAccountid: widget.account.account,
+          },
+        );
       },
       child: Container(
         margin: EdgeInsets.only(top: 10, bottom: 10),

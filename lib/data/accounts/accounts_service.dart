@@ -15,8 +15,8 @@ class AccountsService {
   Future<Result<List<Account>, GetAccountsError>> getAccounts(
     String query,
   ) async {
-    final uri = "${globals.domain}/search/users?q=$query";
-    final response = await networkClient.get(uri);
+    final path = "/search/users?q=$query";
+    final response = await networkClient.get(path);
     if (response.statusCode != 200) return Error(GeneralAccountsFailed());
 
     try {
@@ -32,9 +32,9 @@ class AccountsService {
   }
 
   Future<Result<AccountDetails, GetAccountsError>> getAccountDetails(
-    String username,
+    String? username,
   ) async {
-    final uri = "${globals.domain}/search/users/$username";
+    final uri = "${globals.domain}/users/$username";
     final response = await networkClient.get(uri);
     if (response.statusCode != 200) return Error(GeneralAccountsFailed());
 

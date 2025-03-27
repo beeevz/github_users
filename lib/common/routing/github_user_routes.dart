@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_users/view/accountdetails/accountdetails.dart';
+import 'package:github_users/view/accountdetails/bloc/accountdetails_bloc.dart';
 import 'package:github_users/view/home/bloc/home_bloc.dart';
 import 'package:github_users/view/home/home.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +27,12 @@ class GithubUserRoutes {
           path: AccountDetailsWidget.routePath,
           name: AccountDetailsWidget.routeName,
           builder: (context, state) {
-            return AccountDetailsWidget();
+            final account =
+                state.pathParameters[AccountDetailsWidget.routeAccountid];
+            return BlocProvider(
+              create: (context) => AccountdetailsBloc(),
+              child: AccountDetailsWidget(account: account),
+            );
           },
         ),
       ],

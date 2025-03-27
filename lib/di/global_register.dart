@@ -8,7 +8,7 @@ class GlobalsRegister {
 
     final getIt = GetIt.instance;
     getIt.registerLazySingleton(
-      () => Globals(domain: dotenv.env['DOMAIN'] ?? "", apiKey: ""),
+      () => Globals(domain: dotenv.env['DOMAIN'] ?? "", apiKey: "GITHUB_TOKEN"),
     );
   }
 }
