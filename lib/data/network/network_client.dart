@@ -10,7 +10,7 @@ class NetworkClient {
     final uri = "${globals.domain}$path";
     var response = await http.get(
       Uri.parse(uri),
-      headers: {"Authorization: Bearer": globals.apiKey},
+      headers: {"Authorization": globals.apiKey},
     );
     if (kDebugMode) {
       print('Response status: ${response.statusCode}');

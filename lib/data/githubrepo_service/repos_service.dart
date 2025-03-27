@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get_it/get_it.dart';
 import 'package:github_users/data/githubrepo_service/fetch_githubrepos_error.dart';
 import 'package:github_users/data/githubrepo_service/model/repo.dart';
@@ -16,7 +18,7 @@ class ReposService {
 
     try {
       List<Repo> reposList = [];
-      final responseMap = response.body as List;
+      final responseMap = json.decode(response.body) as List;
       for (var repoProps in responseMap) {
         reposList.add(Repo.fromJson(repoProps));
       }

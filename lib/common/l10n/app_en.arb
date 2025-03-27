@@ -14,6 +14,35 @@
     "failed": "Something went wrong, please try again.",
     "@failed": {
         "description": "Used as a generic error"
+    },
+    "forksCount": "Forks: {forks}",
+    "@forksCount": {
+        "description": "Forks count",
+        "placeholders": {
+            "forks": {
+              "type": "String",
+              "example": "0"
+            }
+          }
+    },
+    "stargazersCount": "Stargazers: {stargazers}",
+    "@stargazersCount": {
+        "description": "Stargazers count",
+        "placeholders": {
+            "stargazers": {
+              "type": "String",
+              "example": "0"
+            }
+          }
+    },
+    "watchersCount": "Watchers: {watchers}",
+    "@watchersCount": {
+        "description": "Watchers count",
+        "placeholders": {
+            "watchers": {
+              "type": "String",
+              "example": "0"
+            }
+          }
     }
-
 }

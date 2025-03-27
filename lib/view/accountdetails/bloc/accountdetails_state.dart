@@ -11,7 +11,10 @@ final class AccountDetailsLoading extends AccountDetailsState {}
 
 final class AccountDetailsLoaded extends AccountDetailsState {
   final AccountDetails accountDetails;
-  const AccountDetailsLoaded(this.accountDetails);
+
+  const AccountDetailsLoaded({
+    required this.accountDetails,
+  });
 
   @override
   List<Object> get props => [accountDetails];

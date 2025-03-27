@@ -20,12 +20,12 @@ class Repo {
   });
 
   Repo.fromJson(Map<String, dynamic> json)
-    : name = json['login'] as String,
-      createdAt = json['avatar_url'] as String?,
-      stargazersCount = json['type'] as int?,
-      forksCount = json['type'] as int?,
-      watchersCount = json['type'] as int?,
-      description = json['type'] as String?,
-      language = json['type'] as String?,
-      htmlUrl = json['type'] as String?;
+    : name = json['name'] as String,
+      createdAt = json['created_at'] as String?,
+      stargazersCount = json['stargazers_count'] as int?,
+      forksCount = json['forks_count'] as int?,
+      watchersCount = json['watchers_count'] as int?,
+      description = json['description'] as String?,
+      language = json['language'] as String?,
+      htmlUrl = json['url'] as String?;
 }

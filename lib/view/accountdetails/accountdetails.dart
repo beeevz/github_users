@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
 import 'package:github_users/view/accountdetails/bloc/accountdetails_bloc.dart';
 import 'package:github_users/view/accountdetails/views/header.dart';
+import 'package:github_users/view/accountdetails/views/repo_list.dart';
 
 class AccountDetailsWidget extends StatefulWidget {
   static const routePath = "/account-details/:id";
@@ -27,12 +28,14 @@ class _AccountDetailsWidgetState extends State<AccountDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: BlocBuilder<AccountdetailsBloc, AccountDetailsState>(
         builder: (context, state) {
           if (state is AccountDetailsLoaded) {
             return Column(
               children: [
                 HeaderWidget(avatarUrl: state.accountDetails.avatarUrl),
+                RepoListView(repoList: state.accountDetails.repoList),
               ],
             );
           } else if (state is AccountDetailsLoading) {
