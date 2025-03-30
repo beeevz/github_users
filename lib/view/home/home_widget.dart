@@ -115,8 +115,9 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 
   bool _alignWithTop(HomeState state) {
-    return (state is! HomeInitial ||
+    return state is! HomeInitial ||
         state.favourites.isNotNullOrEmpty ||
-        state.searchedAccounts.isNotNullOrEmpty);
+        state.searchedAccounts.isNotNullOrEmpty ||
+        state.searchHistory.isNotNullOrEmpty;
   }
 }
