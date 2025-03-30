@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:github_users/common/extensions/list_nullable_ext.dart';
 import 'package:github_users/data/accounts/account_error.dart';
 import 'package:github_users/data/accounts/accounts_service.dart';
 import 'package:github_users/data/accounts/model/account.dart';
