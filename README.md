@@ -1,16 +1,18 @@
 # github_users
 
-A new Flutter project.
+This application has only been coded to run on a mac os application and not on mobile devices,
+If it is required to run on mobile devices there will be additional permissions required to be 
+declared in the manifeset and Info.plist.
 
-## Getting Started
+Flutter project to retrieve details from Github API, you will need a `.env` file that is stored inside:
+- gitub_users
+    - config
+        - config.env
 
-This project is a starting point for a Flutter application.
+The contents will look like:
+DOMAIN=https://api.github.com
+GITHUB_TOKEN=XXXXXXXXXXXXXXXX
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The functionality of the application looks like:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
