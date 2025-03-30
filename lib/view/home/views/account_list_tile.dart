@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
 import 'package:github_users/data/accounts/model/account.dart';
-import 'package:github_users/data/accounts/model/account_details.dart';
 import 'package:github_users/view/accountdetails/accountdetails.dart';
+import 'package:github_users/view/home/bloc/home_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class AccountListTile extends StatefulWidget {
@@ -15,8 +16,6 @@ class AccountListTile extends StatefulWidget {
 }
 
 class _AccountListTileState extends State<AccountListTile> {
-  bool isFavourite = false;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -51,12 +50,12 @@ class _AccountListTileState extends State<AccountListTile> {
             Spacer(),
             IconButton(
               onPressed: () {
-                setState(() {
-                  isFavourite = !isFavourite;
-                });
+                context.read<HomeBloc>().add(FavouriteAccount(widget.account));
               },
               icon: Icon(
-                isFavourite ? Icons.favorite : Icons.favorite_border,
+                widget.account.isFavourite
+                    ? Icons.favorite
+                    : Icons.favorite_border,
                 color: _getFavouriteColor(context),
               ),
             ),
@@ -67,8 +66,7 @@ class _AccountListTileState extends State<AccountListTile> {
   }
 
   Color? _getFavouriteColor(BuildContext context) {
-    // if (widget.account.favourite ?? false) {
-    if (isFavourite) {
+    if (widget.account.isFavourite) {
       return Theme.of(context).sliderTheme.activeTrackColor;
     } else {
       return Theme.of(context).sliderTheme.disabledActiveTrackColor;

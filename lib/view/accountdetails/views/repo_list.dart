@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
-import 'package:github_users/data/githubrepo_service/model/repo.dart';
+import 'package:github_users/data/repo_service/model/repo.dart';
 
 class RepoListView extends StatelessWidget {
   final List<Repo>? repoList;

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_users/common/extensions/list_nullable_ext.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
-import 'package:github_users/data/accounts/model/account.dart';
 import 'package:github_users/view/home/bloc/home_bloc.dart';
 import 'package:github_users/view/home/views/account_list_view.dart';
 
@@ -19,6 +19,12 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   Timer? _searchDebouncer;
+
+  @override
+  void initState() {
+    context.read<HomeBloc>().add(LoadFavourites());
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -46,9 +52,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                 curve: Curves.easeIn,
                 margin: EdgeInsets.only(
                   top:
-                      state is HomeInitial
-                          ? MediaQuery.of(context).size.height * 0.4
-                          : 20,
+                      _alignWithTop(state)
+                          ? 20
+                          : MediaQuery.of(context).size.height * 0.4,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextFormField(
@@ -68,11 +74,25 @@ class _HomeWidgetState extends State<HomeWidget> {
                   },
                 ),
               ),
+              // const SizedBox(height: 10),
+              // if (state.favourites.isNotNullOrEmpty)
+              //   Expanded(
+              //     child: AccountListView(accountList: state.favourites!),
+              //   ),
+              // const SizedBox(height: 10),
+              // if (state.searchedAccounts.isNotNullOrEmpty)
+              //   Expanded(
+              //     child: AccountListView(
+              //       accountList: state.searchedAccounts ?? [],
+              //     ),
+              //   ),
               const SizedBox(height: 10),
-              if (state is! HomeInitial)
+              if (state.favourites.isNotNullOrEmpty ||
+                  state.searchedAccounts.isNotNullOrEmpty)
                 Expanded(
                   child: AccountListView(
-                    accountList: _getAccountsFromState(state),
+                    favourites: state.favourites ?? [],
+                    searchedAccounts: state.searchedAccounts ?? [],
                   ),
                 ),
             ],
@@ -82,7 +102,9 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
   }
 
-  List<Account> _getAccountsFromState(HomeState state) {
-    return (state is AccountsLoaded) ? state.accountList : [];
+  bool _alignWithTop(HomeState state) {
+    return (state is! HomeInitial ||
+        state.favourites.isNotNullOrEmpty ||
+        state.searchedAccounts.isNotNullOrEmpty);
   }
 }

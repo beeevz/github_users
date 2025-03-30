@@ -1,4 +1,4 @@
-import 'package:github_users/data/githubrepo_service/model/repo.dart';
+import 'package:github_users/data/repo_service/model/repo.dart';
 
 class AccountDetails {
   final String? username;

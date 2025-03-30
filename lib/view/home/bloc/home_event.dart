@@ -7,3 +7,11 @@ class LoadAccounts extends HomeEvent {
 
   LoadAccounts(this.enteredValue);
 }
+
+class FavouriteAccount extends HomeEvent {
+  final Account account;
+
+  FavouriteAccount(this.account);
+}
+
+class LoadFavourites extends HomeEvent {}

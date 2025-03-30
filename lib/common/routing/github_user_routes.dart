@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_users/view/accountdetails/accountdetails.dart';
 import 'package:github_users/view/accountdetails/bloc/accountdetails_bloc.dart';
 import 'package:github_users/view/home/bloc/home_bloc.dart';
-import 'package:github_users/view/home/home.dart';
+import 'package:github_users/view/home/home_widget.dart';
 import 'package:go_router/go_router.dart';
 
 class GithubUserRoutes {

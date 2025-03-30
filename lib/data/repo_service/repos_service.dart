@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
-import 'package:github_users/data/githubrepo_service/fetch_githubrepos_error.dart';
-import 'package:github_users/data/githubrepo_service/model/repo.dart';
+import 'package:github_users/data/repo_service/fetch_githubrepos_error.dart';
+import 'package:github_users/data/repo_service/model/repo.dart';
 import 'package:github_users/data/network/network_client.dart';
 import 'package:github_users/data/network/result.dart';
 
