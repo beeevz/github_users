@@ -83,46 +83,29 @@ class _HomeWidgetState extends State<HomeWidget> {
                   },
                 ),
               ),
-              // const SizedBox(height: 10),
-              // if (state is! HomeLoading &&
-              //     (state.favourites.isNotNullOrEmpty ||
-              //         state.searchedAccounts.isNotNullOrEmpty))
-              //   Expanded(
-              //     flex: 1,
-              //     child: AccountListView(
-              //       favourites: state.favourites ?? [],
-              //       searchedAccounts: state.searchedAccounts ?? [],
-              //     ),
-              //   ),
-              // const SizedBox(height: 10),
-              // if (state is! HomeLoading &&
-              //     (state.searchHistory.isNotNullOrEmpty))
-              //   Expanded(
-              //     flex: 2,
-              //     child: SearchHistoryWidget(
-              //       searchHistory: state.searchHistory ?? [],
-              //       callback: (historyEntry) {
-              //         _searchEditingController.text = historyEntry;
-              //         context.read<HomeBloc>().add(LoadAccounts(historyEntry));
-              //       },
-              //     ),
-              //   ),
-              CustomScrollView(
-                slivers: [
-                  AccountListView(
-                    favourites: state.favourites ?? [],
-                    searchedAccounts: state.searchedAccounts ?? [],
-                  ),
-                  // return SearchHistoryWidget(
-                  //   searchHistory: state.searchHistory ?? [],
-                  //   callback: (historyEntry) {
-                  //     _searchEditingController.text = historyEntry;
-                  //     context.read<HomeBloc>().add(
-                  //       LoadAccounts(historyEntry),
-                  //     );
-                  //   },
-                  // );
-                ],
+              Expanded(
+                child: ListView(
+                  children: [
+                    if (state is! HomeLoading &&
+                        (state.favourites.isNotNullOrEmpty ||
+                            state.searchedAccounts.isNotNullOrEmpty))
+                      AccountListView(
+                        favourites: state.favourites ?? [],
+                        searchedAccounts: state.searchedAccounts ?? [],
+                      ),
+                    if (state is! HomeLoading &&
+                        (state.searchHistory.isNotNullOrEmpty))
+                      SearchHistoryWidget(
+                        searchHistory: state.searchHistory ?? [],
+                        callback: (historyEntry) {
+                          _searchEditingController.text = historyEntry;
+                          context.read<HomeBloc>().add(
+                            LoadAccounts(historyEntry),
+                          );
+                        },
+                      ),
+                  ],
+                ),
               ),
             ],
           );

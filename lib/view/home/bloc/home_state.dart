@@ -8,12 +8,19 @@ class HomeState extends Equatable {
   const HomeState({this.favourites, this.searchedAccounts, this.searchHistory});
 
   @override
-  List<Object?> get props => [favourites, searchedAccounts];
+  List<Object?> get props => [favourites, searchedAccounts, searchHistory];
 
   HomeState addFavourite(Account account) {
-    favourites?.add(account);
     return HomeState(
-      favourites: favourites,
+      favourites: [...?favourites, account],
+      searchedAccounts: searchedAccounts,
+      searchHistory: searchHistory,
+    );
+  }
+
+  HomeState removeFavourite(Account account) {
+    return HomeState(
+      favourites: favourites?.where((a) => a != account).toList(),
       searchedAccounts: searchedAccounts,
       searchHistory: searchHistory,
     );

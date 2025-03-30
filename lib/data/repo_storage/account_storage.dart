@@ -7,7 +7,6 @@ import 'package:sqflite/sqflite.dart';
 
 class AccountStorage {
   final dbClient = GetIt.instance<DatabaseClient>();
-
   // Insert an Account
   Future<Result<Null, AccountStorageError>> insertAccount(
     Account account,
@@ -42,12 +41,20 @@ class AccountStorage {
   }
 
   // Delete an Account
-  Future<int> deleteAccount(String account) async {
+  Future<Result<Null, AccountStorageError>> deleteAccount(
+    String account,
+  ) async {
     final db = await dbClient.database;
-    return await db.delete(
+    final result = await db.delete(
       'account_storage',
-      where: 'name = ?',
+      where: 'login = ?',
       whereArgs: [account],
     );
+
+    if (result != 0) {
+      return Success(null);
+    } else {
+      return Error(AccountStorageError());
+    }
   }
 }

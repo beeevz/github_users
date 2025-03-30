@@ -50,7 +50,15 @@ class _AccountListTileState extends State<AccountListTile> {
             Spacer(),
             IconButton(
               onPressed: () {
-                context.read<HomeBloc>().add(FavouriteAccount(widget.account));
+                if (widget.account.isFavourite) {
+                  context.read<HomeBloc>().add(
+                    UnFavouriteAccount(widget.account),
+                  );
+                } else {
+                  context.read<HomeBloc>().add(
+                    FavouriteAccount(widget.account),
+                  );
+                }
               },
               icon: Icon(
                 widget.account.isFavourite

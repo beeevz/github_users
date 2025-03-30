@@ -14,4 +14,10 @@ class FavouriteAccount extends HomeEvent {
   FavouriteAccount(this.account);
 }
 
+class UnFavouriteAccount extends HomeEvent {
+  final Account account;
+
+  UnFavouriteAccount(this.account);
+}
+
 class LoadInitialScreen extends HomeEvent {}

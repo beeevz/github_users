@@ -17,26 +17,12 @@ class AccountListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   margin: EdgeInsets.only(left: 10, right: 10),
-    //   // child: ListView.builder(
-    //   //   physics: NeverScrollableScrollPhysics(),
-    //   //   shrinkWrap: true,
-    //   //   itemCount: accountsForDisplay.length,
-    //   //   itemBuilder: (context, index) {
-    //   //     return AccountListTile(accountsForDisplay[index]);
-    //   //   },
-    //   // ),
-    //   child: Column(
-    //     children: List.generate(accountsForDisplay.length, (index) {
-    //       return AccountListTile(accountsForDisplay[index]);
-    //     }),
-    //   ),
-    // );
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        childCount: accountsForDisplay.length,
-        (context, index) => AccountListTile(accountsForDisplay[index]),
+    return Container(
+      margin: EdgeInsets.only(left: 10, right: 10),
+      child: Column(
+        children: List.generate(accountsForDisplay.length, (index) {
+          return AccountListTile(accountsForDisplay[index]);
+        }),
       ),
     );
   }

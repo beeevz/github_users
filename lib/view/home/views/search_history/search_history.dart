@@ -13,21 +13,18 @@ class SearchHistoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: searchHistory.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            callback(searchHistory[index].query);
-          },
-          child: Container(
-            // padding: EdgeInsets.only(top: 10, bottom: 10),
+    return Container(
+      margin: EdgeInsets.only(left: 10, right: 10),
+      child: Column(
+        children: List.generate(searchHistory.length, (index) {
+          return InkWell(
+            onTap: () {
+              callback(searchHistory[index].query);
+            },
             child: ListTile(title: Text(searchHistory[index].query)),
-          ),
-        );
-      },
+          );
+        }),
+      ),
     );
   }
 }

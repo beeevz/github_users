@@ -27,6 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<LoadAccounts>(_loadAccounts);
     on<LoadInitialScreen>(_loadInitial);
     on<FavouriteAccount>(_favouriteAccount);
+    on<UnFavouriteAccount>(_unfavouriteAccount);
   }
 
   _loadAccounts(LoadAccounts event, Emitter<HomeState> emit) async {
@@ -69,6 +70,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     switch (result) {
       case Success():
         final updatedState = state.addFavourite(event.account);
+        emit(updatedState);
+      case Error():
+      // We can decide how we want to handle this.
+    }
+  }
+
+  _unfavouriteAccount(UnFavouriteAccount event, Emitter<HomeState> emit) async {
+    final result = await _accountStorage.deleteAccount(event.account.account);
+
+    switch (result) {
+      case Success():
+        final updatedState = state.removeFavourite(event.account);
         emit(updatedState);
       case Error():
       // We can decide how we want to handle this.
