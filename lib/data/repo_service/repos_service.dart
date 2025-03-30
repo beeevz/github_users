@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
-import 'package:github_users/data/repo_service/fetch_githubrepos_error.dart';
+import 'package:github_users/data/repo_service/repos_service_error.dart';
 import 'package:github_users/data/repo_service/model/repo.dart';
 import 'package:github_users/data/network/network_client.dart';
 import 'package:github_users/data/network/result.dart';
@@ -9,7 +9,7 @@ import 'package:github_users/data/network/result.dart';
 class ReposService {
   final networkClient = GetIt.instance<NetworkClient>();
 
-  Future<Result<List<Repo>, FetchGithubreposError>> getRepos(
+  Future<Result<List<Repo>, ReposServiceError>> getRepos(
     String username,
   ) async {
     final path = "/users/$username/repos";

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
-import 'package:github_users/common/globals.dart';
 import 'package:github_users/data/accounts/account_error.dart';
 import 'package:github_users/data/accounts/model/account.dart';
 import 'package:github_users/data/accounts/model/account_details.dart';

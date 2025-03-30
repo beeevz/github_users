@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_users/common/extensions/list_nullable_ext.dart';
 import 'package:github_users/common/localization/translation_helper.dart';
 import 'package:github_users/view/home/bloc/home_bloc.dart';
-import 'package:github_users/view/home/views/account_list_view.dart';
+import 'package:github_users/view/home/views/account_list/account_list_view.dart';
+import 'package:github_users/view/home/views/search_history/search_history.dart';
 
 class HomeWidget extends StatefulWidget {
   static const routePath = "/home";
@@ -18,25 +19,31 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  late TextEditingController _searchEditingController;
   Timer? _searchDebouncer;
 
   @override
   void initState() {
-    context.read<HomeBloc>().add(LoadFavourites());
+    context.read<HomeBloc>().add(LoadInitialScreen());
+    _searchEditingController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
     _searchDebouncer?.cancel();
+    _searchEditingController.dispose();
     super.dispose();
   }
 
   _onSearchChanged(BuildContext context, String query) {
-    if (query.isEmpty) return;
     if (_searchDebouncer?.isActive ?? false) _searchDebouncer?.cancel();
     _searchDebouncer = Timer(const Duration(milliseconds: 500), () {
-      context.read<HomeBloc>().add(LoadAccounts(query));
+      if (query.isEmpty) {
+        context.read<HomeBloc>().add(LoadInitialScreen());
+      } else {
+        context.read<HomeBloc>().add(LoadAccounts(query));
+      }
     });
   }
 
@@ -46,6 +53,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 400),
@@ -58,6 +66,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextFormField(
+                  controller: _searchEditingController,
                   decoration: InputDecoration(
                     hintText: t(context).search,
                     suffixIcon:
@@ -75,26 +84,46 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
               ),
               // const SizedBox(height: 10),
-              // if (state.favourites.isNotNullOrEmpty)
+              // if (state is! HomeLoading &&
+              //     (state.favourites.isNotNullOrEmpty ||
+              //         state.searchedAccounts.isNotNullOrEmpty))
               //   Expanded(
-              //     child: AccountListView(accountList: state.favourites!),
-              //   ),
-              // const SizedBox(height: 10),
-              // if (state.searchedAccounts.isNotNullOrEmpty)
-              //   Expanded(
+              //     flex: 1,
               //     child: AccountListView(
-              //       accountList: state.searchedAccounts ?? [],
+              //       favourites: state.favourites ?? [],
+              //       searchedAccounts: state.searchedAccounts ?? [],
               //     ),
               //   ),
-              const SizedBox(height: 10),
-              if (state.favourites.isNotNullOrEmpty ||
-                  state.searchedAccounts.isNotNullOrEmpty)
-                Expanded(
-                  child: AccountListView(
+              // const SizedBox(height: 10),
+              // if (state is! HomeLoading &&
+              //     (state.searchHistory.isNotNullOrEmpty))
+              //   Expanded(
+              //     flex: 2,
+              //     child: SearchHistoryWidget(
+              //       searchHistory: state.searchHistory ?? [],
+              //       callback: (historyEntry) {
+              //         _searchEditingController.text = historyEntry;
+              //         context.read<HomeBloc>().add(LoadAccounts(historyEntry));
+              //       },
+              //     ),
+              //   ),
+              CustomScrollView(
+                slivers: [
+                  AccountListView(
                     favourites: state.favourites ?? [],
                     searchedAccounts: state.searchedAccounts ?? [],
                   ),
-                ),
+                  // return SearchHistoryWidget(
+                  //   searchHistory: state.searchHistory ?? [],
+                  //   callback: (historyEntry) {
+                  //     _searchEditingController.text = historyEntry;
+                  //     context.read<HomeBloc>().add(
+                  //       LoadAccounts(historyEntry),
+                  //     );
+                  //   },
+                  // );
+                ],
+              ),
             ],
           );
         },

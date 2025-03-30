@@ -26,8 +26,8 @@ class AccountDetails {
   });
 
   AccountDetails.fromJson(Map<String, dynamic> json)
-    : name = json['name'] as String,
-      username = json['login'] as String?,
+    : username = json['login'] as String,
+      name = json['name'] as String?,
       createdAt = json['created_at'] as String?,
       avatarUrl = json['avatar_url'] as String?,
       bio = json['bio'] as String?,

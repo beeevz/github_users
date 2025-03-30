@@ -30,7 +30,7 @@ class Account {
       'login': account,
       'avatar_url': avatarUrl,
       'type': type,
-      'favourite': favourite,
+      'favourite': (isFavourite ? 1 : 0),
     };
   }
 
