@@ -11,8 +11,11 @@ Flutter project to retrieve details from Github API, you will need a `.env` file
 
 The contents will look like:
 DOMAIN=https://api.github.com
+
 GITHUB_TOKEN=XXXXXXXXXXXXXXXX
 
 
 The functionality of the application looks like:
+
+https://github.com/user-attachments/assets/f12b5fb1-d371-42a3-a423-32e406620da9
 
